@@ -10,5 +10,6 @@ public class PalestraApplication {
 		SpringApplication.run(PalestraApplication.class, args);
 	}
 	
+	
 
 }
