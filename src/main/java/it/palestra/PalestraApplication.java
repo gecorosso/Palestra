@@ -9,5 +9,6 @@ public class PalestraApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PalestraApplication.class, args);
 	}
+	
 
 }
