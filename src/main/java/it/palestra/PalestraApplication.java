@@ -7,7 +7,10 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
 @SpringBootApplication
 @ComponentScan("it.palestra")
-@EnableJdbcRepositories(basePackages ="it.palestra.dao")
+
+//EnableJdbcRepositories deve puntare alle interfacce che instanziano 
+//la jpa repository
+@EnableJdbcRepositories(basePackages = "it.palestra.dao.interfaces")
 
 public class PalestraApplication {
 	

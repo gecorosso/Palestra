@@ -2,11 +2,13 @@ package it.palestra.dao.entity;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "Persona")
 public class Persona implements Serializable {
@@ -14,7 +16,7 @@ public class Persona implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id_persona;
+	Integer id_persona;
 
 	@Column(name = "nome")
 	String nome;
@@ -31,11 +33,17 @@ public class Persona implements Serializable {
 	@Column(name = "telefonoEmegenza")
 	String telefonoEmegenza;
 
+	
+	@OneToOne(mappedBy = "persona", cascade=CascadeType.ALL)
+	private Tessera tessera;
+	
+	
+	
 	public Persona() {	
 		
 	}
 
-	public Persona(int id_persona, String nome, String cognome, String citta, String telefonoPersona,
+	public Persona(Integer id_persona, String nome, String cognome, String citta, String telefonoPersona,
 			String telefonoEmegenza) {
 		this.id_persona = id_persona;
 		this.nome = nome;
@@ -45,11 +53,11 @@ public class Persona implements Serializable {
 		this.telefonoEmegenza = telefonoEmegenza;
 	}
 
-	public int getId_persona() {
+	public Integer getId_persona() {
 		return id_persona;
 	}
 
-	public void setId_persona(int id_persona) {
+	public void setId_persona(Integer id_persona) {
 		this.id_persona = id_persona;
 	}
 
