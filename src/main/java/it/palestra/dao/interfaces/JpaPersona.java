@@ -18,8 +18,6 @@ public interface JpaPersona extends JpaRepositoryImplementation<Persona, Integer
     List<Object[]> findByCognomeAndNomeAndCittaAndCodiceTesseraAndStatusTessera();
 
     
-   // List<Persona> findById_persona(Integer id_persona);
-    
     
     public void deleteByNome(String nome);
 
