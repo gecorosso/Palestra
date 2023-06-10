@@ -16,6 +16,7 @@ public class Persona implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_persona")
 	Integer id_persona;
 
 	@Column(name = "nome")

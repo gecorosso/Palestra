@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.palestra.dao.QueryObj.QueryPersTess;
 import it.palestra.dao.entity.Persona;
 import it.palestra.dao.service.ServiceCliente;
 
@@ -65,15 +66,39 @@ public class PalestraController {
 	}
 	
 	//Cancellazione
-	// http://localhost:8080/palestra/cancella?id=1
-	@DeleteMapping("/cancella")
-	public String cancella(@RequestParam("id") Integer id) {
-		serviceCliente.cancPersona(id);
-		return "Cancellazione eseguita"+id.toString();
+	// http://localhost:8080/palestra/cancella?nome=Teresa
+	@GetMapping("/cancella")
+	public String cancella(@RequestParam("nome") String nome) {
+		return null;
 	}
 	
 	
-	
+	// http://localhost:8080/palestra/vediQuery
+	@GetMapping("/vediQuery")
+	public void vediQuery(){
+		
+//		List<Object[]> lista = serviceCliente.listaQuery();
+//	
+//		lista.forEach(xx ->{
+//			System.out.print(xx[0].toString());
+//			System.out.print(xx[1].toString());
+//			System.out.print(xx[2].toString());
+//			System.out.print(xx[3].toString());
+//			System.out.println(xx[4].toString());
+//		} );
+//----------------------------------------------
+		List<QueryPersTess> listaQuery = serviceCliente.listaQueryConObj();
+		
+		listaQuery.forEach(myLqe ->{
+			System.out.println(myLqe.getCognome());
+			System.out.println(myLqe.getNome());
+			System.out.println(myLqe.getCitta());
+			System.out.println(myLqe.getCodice_tessera());
+			System.out.println(myLqe.getStatus_tessera());
+			System.out.println("-----------------------------------");
+		});
+		
+	}
 	
 	
 }

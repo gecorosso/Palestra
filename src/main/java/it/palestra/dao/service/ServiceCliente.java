@@ -6,11 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.palestra.dao.QueryObj.QueryPersTess;
 import it.palestra.dao.entity.Persona;
 import it.palestra.dao.repository.RepositoryClienti;
 
 @Service
 public class ServiceCliente {
+	
 	private RepositoryClienti repository_clienti;
 	
 	@Autowired
@@ -25,15 +27,22 @@ public class ServiceCliente {
 	}
     
 	
-	//Cancellazione
-	public void cancPersona(Integer id) {
-		repository_clienti.cancellaPersona(id);
-	}
-	
 	
 	//Elenco Clienti
 	public List<Persona> listaTuttiClienti(){
 		return repository_clienti.listaClienti();
 	}
+	
+	//VediQuery
+	public List<Object[]> listaQuery(){
+		return repository_clienti.queryCompleta();
+	}
+	
+	public List<QueryPersTess> listaQueryConObj(){
+		return repository_clienti.queryCompletaConObj();
+	}
+	
+	
+	
 	
 }

@@ -1,16 +1,22 @@
 package it.palestra.dao.repository;
 
-import java.util.List;
+import java.util.*;
 import java.util.Optional;
 
+import org.hibernate.query.spi.QueryParameterBindingTypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import it.palestra.dao.entity.Persona;
 import it.palestra.dao.interfaces.JpaPersona;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import it.palestra.dao.QueryObj.*;
 
 @Repository
 public class RepositoryClienti {
+	
+	
 	private JpaPersona jpa_persona;
 
 	@Autowired
@@ -19,10 +25,6 @@ public class RepositoryClienti {
 	}
 	
 		
-    public List<Persona> cercaClienteConNome(String nome){
-    	return jpa_persona.findByNome(nome);
-    }
-
     public Optional<Persona> cercaClienteConId(Integer id) {
     	return jpa_persona.findById(id);
     }
@@ -47,7 +49,39 @@ public class RepositoryClienti {
     	jpa_persona.deleteById(id);
     }
     
+    //VediQuery
+    public List<Object[]> queryCompleta(){
+    	return jpa_persona.findByCognomeAndNomeAndCittaAndCodiceTesseraAndStatusTessera();
     
+    }
+
     
+    //Con Obj
+    public List<QueryPersTess> queryCompletaConObj(){
+    	List<Object[]> lista = jpa_persona.findByCognomeAndNomeAndCittaAndCodiceTesseraAndStatusTessera();
+        
+    	List<QueryPersTess>lista_di_righe = new ArrayList<>();
+    	
+    	lista.forEach(myLista -> {
+    		QueryPersTess qpt = new QueryPersTess();
+    		
+    		qpt.setCognome(myLista[0].toString());
+    		qpt.setNome(myLista[1].toString());
+    		qpt.setCitta(myLista[2].toString());
+    		qpt.setCodice_tessera(myLista[3].toString());
+    		qpt.setStatus_tessera(myLista[4].toString());
+    		
+    		lista_di_righe.add(qpt);
+    	});
+    	    	    	
+    	return lista_di_righe;
+    }
+    
+    //cancella
+    public void  cancellaPersonaByName(String nome) {
+    	jpa_persona.deleteByNome(nome);
+    }
+    	
+
     
 }
