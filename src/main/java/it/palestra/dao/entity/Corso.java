@@ -1,12 +1,15 @@
 package it.palestra.dao.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 
 @Entity(name = "Corso")
 public class Corso implements Serializable {
@@ -22,6 +25,10 @@ public class Corso implements Serializable {
     @Column(name = "orario_corso")
     String orario_corso;
 
+	@ManyToMany(mappedBy = "corso")
+	List<Persona> persona;
+	
+    
 	
 	
 	public Corso(Integer id_corso, String sala_corso, String orario_corso) {

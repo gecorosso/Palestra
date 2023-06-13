@@ -1,12 +1,16 @@
 package it.palestra.dao.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "Istruttore")
 public class Istruttore implements Serializable {
@@ -25,6 +29,11 @@ public class Istruttore implements Serializable {
 	
 	@Column(name="disciplina")
 	String disciplina;
+			
+	//Istruttore-Persona 
+	//un istruttore molte persone
+	@OneToMany(mappedBy = "istruttore")
+	List<Persona> persona;
 	
 	public Istruttore() {
 	}

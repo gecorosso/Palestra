@@ -1,6 +1,9 @@
 package it.palestra.dao.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.boot.context.properties.bind.Name;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -8,6 +11,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity(name = "Persona")
@@ -33,10 +42,26 @@ public class Persona implements Serializable {
 
 	@Column(name = "telefonoEmegenza")
 	String telefonoEmegenza;
-
 	
+	//Persona-Tessera 1 ad uno 
 	@OneToOne(mappedBy = "persona", cascade=CascadeType.ALL)
 	private Tessera tessera;
+	
+	//Persona-Istruttore molti a 1
+	@ManyToOne
+	@JoinColumn(name = "id_istruttore")
+	Istruttore istruttore;
+
+	//Persona-Corso
+	//Molte persone partecipano a molti corsi
+	@ManyToMany()
+	@JoinTable(
+		name="persona-corso",
+		joinColumns=@JoinColumn(name="id_persona"),
+		inverseJoinColumns=@JoinColumn(name="Id_corso")
+	)
+	private List<Corso> corso;
+	
 	
 	
 	
@@ -102,4 +127,7 @@ public class Persona implements Serializable {
 		this.telefonoEmegenza = telefonoEmegenza;
 	}
 
+	
+	
+	
 }
