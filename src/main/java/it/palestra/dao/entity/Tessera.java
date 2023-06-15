@@ -9,57 +9,39 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "Tessera")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tessera implements Serializable {
 	private static final long serialVersionUID = -6147937015471291751L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter @Setter
 	Integer Id_tessera;
 
 	@Column(name = "codice_tessera")
+	@Getter @Setter
 	String codice_tessera;
 
 	@Column(name = "status_tessera")
+	@Getter @Setter
 	String status_tessera;
 
+//	//==Relazioni==
+//	@OneToOne
+//	@JoinColumn(name="id_persona")
+//	private Persona persona;
+
+//Relazione: Persona-Tessera
+//Rapporto 1:1
 	@OneToOne
-	@JoinColumn(name="id_persona")
-	private Persona persona;
-	
-	
-	public Tessera() {
-	}
-
-	public Tessera(Integer id_tessera, String codice_tessera, String status_tessera) {
-		this.Id_tessera = id_tessera;
-		this.codice_tessera = codice_tessera;
-		this.status_tessera = status_tessera;
-	}
-
-	public Integer getId_tessera() {
-		return Id_tessera;
-	}
-
-	public void setId_tessera(Integer id_tessera) {
-		Id_tessera = id_tessera;
-	}
-
-	public String getCodice_tessera() {
-		return codice_tessera;
-	}
-
-	public void setCodice_tessera(String codice_tessera) {
-		this.codice_tessera = codice_tessera;
-	}
-
-	public String getStatus_tessera() {
-		return status_tessera;
-	}
-
-	public void setStatus_tessera(String status_tessera) {
-		this.status_tessera = status_tessera;
-	}
+	@JoinColumn(name = "id_persona")
+	Persona persona;	
 
 }

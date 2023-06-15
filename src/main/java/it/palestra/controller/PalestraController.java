@@ -3,13 +3,8 @@ package it.palestra.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,31 +22,17 @@ import it.palestra.dao.service.ServiceCliente;
 
 @RequestMapping("/palestra")
 public class PalestraController {
-
+	
 	@Autowired 
 	ServiceCliente serviceCliente;
 
 	
 	// http://localhost:8080/palestra/inserisci	
-	@GetMapping("/inserisci")
-	public String inserimentoCliente() {
-		Persona persona = new Persona();
-		
-		persona.setNome("Mary");
-		persona.setCognome("Salterno");
-		persona.setCitta("Roma");
-		persona.setTelefonoEmegenza("345");
-		persona.setTelefonoPersona("22222");
-		
+	@PostMapping("/inserisci")
+	public ResponseEntity<Persona> inserimentoCliente(Persona persona) {
 		serviceCliente.insPersona(persona);
-			
-		List<Persona> pp = serviceCliente.listaTuttiClienti();
-		
-		pp.forEach(listaClienti ->{
-			System.out.println(listaClienti.getNome());
-		});
-		
-		return "inserimentoAvvenuto";
+		List<Persona> pp = serviceCliente.listaTuttiClienti();		
+		return ResponseEntity.status(HttpStatus.CREATED).body(persona);
 	}
 	
 	//Modifica
@@ -59,16 +40,17 @@ public class PalestraController {
 	@GetMapping("/modifica")
 	public String modificaPersona() {
 		Persona persona = new Persona();
-		persona.setId_persona(4);
-		persona.setNome("Mariagiovanna");
-		persona.setCognome("Picchia");
-		persona.setCitta("Salerno");
-		persona.setTelefonoEmegenza("333345");
-		persona.setTelefonoPersona("888822222");
+//		persona.setId_persona(4);
+//		persona.setNome("Mariagiovanna");
+//		persona.setCognome("Picchia");
+//		persona.setCitta("Salerno");
+//		persona.setTelefonoEmegenza("333345");
+//		persona.setTelefonoPersona("888822222");
 		
 		serviceCliente.insPersona(persona);
 		
-		return persona.getNome() + "-->Modificato";
+		
+		return null;
 	}
 	
 	// http://localhost:8080/palestra/modificaPost/
@@ -90,16 +72,6 @@ public class PalestraController {
 	@GetMapping("/vediQuery")
 	public ResponseEntity<List<QueryPersTess>> vediQuery(){
 		
-//		List<Object[]> lista = serviceCliente.listaQuery();
-//	
-//		lista.forEach(xx ->{
-//			System.out.print(xx[0].toString());
-//			System.out.print(xx[1].toString());
-//			System.out.print(xx[2].toString());
-//			System.out.print(xx[3].toString());
-//			System.out.println(xx[4].toString());
-//		} );
-//----------------------------------------------
 		List<QueryPersTess> listaQuery = serviceCliente.listaQueryConObj();
 		
 		listaQuery.forEach(myLqe ->{

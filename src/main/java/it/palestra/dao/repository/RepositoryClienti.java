@@ -1,17 +1,15 @@
 package it.palestra.dao.repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.query.spi.QueryParameterBindingTypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import it.palestra.dao.QueryObj.QueryPersTess;
 import it.palestra.dao.entity.Persona;
 import it.palestra.dao.interfaces.JpaPersona;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import it.palestra.dao.QueryObj.*;
 
 @Repository
 public class RepositoryClienti {
