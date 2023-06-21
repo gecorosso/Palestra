@@ -2,6 +2,8 @@ package it.palestra.dao.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import it.palestra.dao.repository.RepositoryClienti;
 
 @Service
 public class ServiceCliente {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ServiceCliente.class);
 	
 	private RepositoryClienti repository_clienti;
 	
@@ -27,10 +31,10 @@ public class ServiceCliente {
     
 	
 	
-	//Elenco Clienti
-	public List<Persona> listaTuttiClienti(){
-		return repository_clienti.listaClienti();
-	}
+//	//Elenco Clienti
+//	public List<Persona> listaTuttiClienti(){
+//		return repository_clienti.listaClienti();
+//	}
 	
 	//VediQuery
 	public List<Object[]> listaQuery(){
@@ -41,7 +45,11 @@ public class ServiceCliente {
 		return repository_clienti.queryCompletaConObj();
 	}
 	
+	public List<Persona> listaCitta(String citta){
+		logger.info("==Service==="+citta+"==============");
+		return repository_clienti.tutteCitta(citta);
+	}
 	
-	
+
 	
 }

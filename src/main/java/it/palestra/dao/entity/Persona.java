@@ -2,10 +2,13 @@ package it.palestra.dao.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+//import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.*;
+import org.hibernate.validator.*;
 
 @Entity(name = "Persona")
 @AllArgsConstructor
@@ -16,42 +19,49 @@ public class Persona implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_persona")
-	@Getter @Setter
+	@Getter
+	@Setter
 	Integer id_persona;
 
 	@Column(name = "nome")
 	@NotNull
 	@NotEmpty
 	@NotBlank
-	@Getter @Setter
+	@Getter
+	@Setter
+	//@Size(max=15 ,message="Numero di caratteri 15")
 	String nome;
 
 	@Column(name = "cognome")
 	@NotNull
 	@NotEmpty
 	@NotBlank
-	@Getter @Setter
+	@Getter
+	@Setter
 	String cognome;
 
 	@Column(name = "citta")
 	@NotNull
 	@NotEmpty
 	@NotBlank
-	@Getter @Setter
+	@Getter
+	@Setter
 	String citta;
 
 	@Column(name = "telefonoPersona")
 	@NotNull
 	@NotEmpty
 	@NotBlank
-	@Getter @Setter
+	@Getter
+	@Setter
 	String telefonoPersona;
 
 	@Column(name = "telefonoEmegenza")
 	@NotNull
 	@NotEmpty
 	@NotBlank
-	@Getter @Setter
+	@Getter
+	@Setter
 	String telefonoEmegenza;
 
 //	//==Relazioni==
