@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import it.palestra.PalestraApplication;
+
 import it.palestra.dao.QueryObj.QueryPersTess;
 import it.palestra.dao.entity.Persona;
 import it.palestra.dao.interfaces.JpaPersona;
@@ -30,16 +32,7 @@ public class RepositoryClienti {
     	return jpa_persona.findById(id);
     }
     
-//    //tuttal la lista clienti
-//    public List<Persona> listaClienti(){
-//    	return jpa_persona.findAll();
-//    }
-//    
-    //Lista di tutti i clienti
-//    public List<Persona> elencoClienti(){
-//    	return jpa_persona.findAll();
-//    }
-    
+
     //Inserimento-Modifica
     public void inserisciPersona(Persona persona) {
     	jpa_persona.save(persona);
@@ -53,7 +46,6 @@ public class RepositoryClienti {
     //VediQuery
     public List<Object[]> queryCompleta(){
     	return jpa_persona.findByCognomeAndNomeAndCittaAndCodiceTesseraAndStatusTessera();
-    
     }
 
     
@@ -86,13 +78,10 @@ public class RepositoryClienti {
     
     public List<Persona> tutteCitta(String citta){
     	logger.info("======DENTRO_reposirory======="+citta+"=============");
+    	List<Persona> lista = jpa_persona.findByCitta(citta);
+    	logger.info("---------------->"+lista.size());
     	
-    	
-    	
-    	
-    	return jpa_persona.findAll();
-    	//return jpa_persona.findByCitta(citta);
-    	
+    	return lista;    	
     }
     
     

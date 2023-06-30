@@ -23,7 +23,6 @@ public class PalestraApplication implements CommandLineRunner {
 		SpringApplication.run(PalestraApplication.class, args);
 	}
 
-
 	@Override
 	public void run(String... args) throws Exception {
 		// Con questo metodo si apre prima di tutti gli altri!!

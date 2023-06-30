@@ -85,7 +85,20 @@
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>				
+		</dependency>
+		<!-- INIZIO -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.xml.bind</groupId>
+		    <artifactId>jaxb-api</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
+
+		<!--FINE-->								
 		<dependency>
 			<groupId>Apt</groupId>
 			<artifactId>Apt_01</artifactId>
@@ -123,6 +136,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
 		</plugins>
 	</build>	
 </project>

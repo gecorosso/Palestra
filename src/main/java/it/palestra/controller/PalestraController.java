@@ -2,12 +2,12 @@ package it.palestra.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -19,12 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.palestra.PalestraApplication;
 import it.palestra.dao.QueryObj.QueryPersTess;
 import it.palestra.dao.entity.Persona;
-import it.palestra.dao.repository.RepositoryClienti;
+import it.palestra.dao.entity.Veicolo;
 import it.palestra.dao.service.ServiceCliente;
-import jakarta.servlet.http.HttpServletRequest;
+import it.palestra.dao.service.ServiceVeicolo;
 import jakarta.validation.Valid;
 //import jakarta.validation.Valid;
 
@@ -42,10 +41,8 @@ public class PalestraController {
 	@Autowired 
 	ServiceCliente serviceCliente;
 	
-//	@Autowired
-//	RepositoryClienti repository;
-
-	
+	@Autowired
+	ServiceVeicolo serviceVeicolo;
 	
 	// http://localhost:8080/palestra/inserisci	
 	@PostMapping("/inserisci")
@@ -132,7 +129,7 @@ public class PalestraController {
 		
 	}
 	
-	// http://localhost:8080/palestra/listaCitta?citta='Roma'
+	// http://localhost:8080/palestra/listaCitta?citta='napoli'
 	@GetMapping("/listaCitta")
 	public List<Persona> elencoCitta(@RequestParam("citta") String citta){
 		
@@ -146,7 +143,26 @@ public class PalestraController {
 	
 	}
 	
+	//http://localhost:8080/palestra/cerca?id=5
+	@GetMapping("/cerca")
+	public Optional<Persona> cercaConId(@RequestParam("id") String id) {
+		Optional<Persona> persona = serviceCliente.cercaClienteConId(Integer.parseInt(id));
+		logger.info("--Ritorno di Persona-->" + persona.get().getCognome());
+		
+		return persona;  
+	}
 	
+	@GetMapping("/tuttiVeicoli")
+	public ResponseEntity<List<Veicolo>> tuttiVeicoli() {
+		try {
+        	List<Veicolo> v = serviceVeicolo.tuttiVeicoli();
+    		return ResponseEntity.status(HttpStatus.CREATED).body(v);
+        }catch(Exception e) {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();           	
+        }
+	}
+	
+  
 }
 
 

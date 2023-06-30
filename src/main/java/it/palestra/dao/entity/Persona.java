@@ -21,7 +21,7 @@ public class Persona implements Serializable {
 	@Column(name = "id_persona")
 	@Getter
 	@Setter
-	Integer id_persona;
+	public Integer id_persona;
 
 	@Column(name = "nome")
 	@NotNull
@@ -30,7 +30,7 @@ public class Persona implements Serializable {
 	@Getter
 	@Setter
 	//@Size(max=15 ,message="Numero di caratteri 15")
-	String nome;
+	public String nome;
 
 	@Column(name = "cognome")
 	@NotNull
@@ -38,7 +38,7 @@ public class Persona implements Serializable {
 	@NotBlank
 	@Getter
 	@Setter
-	String cognome;
+	public String cognome;
 
 	@Column(name = "citta")
 	@NotNull
@@ -46,7 +46,7 @@ public class Persona implements Serializable {
 	@NotBlank
 	@Getter
 	@Setter
-	String citta;
+	public String citta;
 
 	@Column(name = "telefonoPersona")
 	@NotNull
@@ -54,7 +54,7 @@ public class Persona implements Serializable {
 	@NotBlank
 	@Getter
 	@Setter
-	String telefonoPersona;
+	public String telefonoPersona;
 
 	@Column(name = "telefonoEmegenza")
 	@NotNull
@@ -62,7 +62,7 @@ public class Persona implements Serializable {
 	@NotBlank
 	@Getter
 	@Setter
-	String telefonoEmegenza;
+	public String telefonoEmegenza;
 
 //	//==Relazioni==
 //	//Persona-Tessera 1 ad uno 
